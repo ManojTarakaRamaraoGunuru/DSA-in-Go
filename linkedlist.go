@@ -37,6 +37,28 @@ func (ll *linkedlist)insert_at_end(val int){
 	cur_last.next = &temp
 }
 
+func (ll * linkedlist) delete(val int){
+	if ll.head == nil{
+		return
+	}
+
+	if ll.head.data == val{
+		ll.head = ll.head.next
+		return
+	}
+
+	temp:= ll.head
+
+	for temp.next!=nil && temp.next.data!=val{
+		temp = temp.next
+	}
+	
+	if temp.next != nil{
+		temp.next = temp.next.next
+	}
+
+}
+
 func (ll *linkedlist)printer(){
 	t := ll.head
 	for t!=nil{
@@ -47,12 +69,16 @@ func (ll *linkedlist)printer(){
 }
 
 func main(){
-	fmt.Println("ok")
 	ll := linkedlist{}
 
 	for i:=0; i<5; i++{
 		ll.insert_at_end(i)
-		// ll.printer()
 	}
+	ll.printer()
+
+	for i:=5; i>=3;i--{
+		ll.delete(i)
+	}
+	fmt.Println(" ")
 	ll.printer()
 }
